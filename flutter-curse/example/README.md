@@ -1,3 +1,5 @@
-# Flutter Curse
+# Example App
 
-README...
+Simple app created by `flutter create example`
+
+
