@@ -25,8 +25,16 @@ multiply(a,b) => a * b; // Anonymous Function
 class Person{
   String name;
   int age;
+  Person(this.name, this.age); // position parameters
 }
 
+class Product{
+  String name;
+  double cost;
+  String made;
+  // named parameters with default value
+  Product({this.name, this.cost, this.made = 'Brazil'});
+}
 
 main() {
   add(1, 2);
@@ -34,9 +42,9 @@ main() {
   print("Result is => ${divide(4, 2)}"); //String interpolation with one function
   exec(2, 3, multiply);
 
-  var p = new Person();
-  p.name = 'Robson';
-  p.age = 43;
+  var person = Person('Robson', 42);
+  print("The age of ${person.name} is ${person.age}");
 
-  print("The age of ${p.name} is ${p.age}");
+  var product = Product(cost: 2.0, name: 'Computer');
+  print("The Product ${product.name} made in ${product.made} the cost is ${product.cost}");
 }
