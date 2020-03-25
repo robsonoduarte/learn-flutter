@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 
 main() => runApp(QuestionApp());
 
-class QuestionApp extends StatelessWidget{
-
-
+class QuestionAppState extends State<QuestionApp>{
   var questionSelected = 0;
-
   void answer(){
+    setState(() {
+      questionSelected++;
+    });
     print('question answered');
   }
-
-
   @override
   Widget build(BuildContext context) {
     final questions = [
@@ -20,11 +18,11 @@ class QuestionApp extends StatelessWidget{
     ];
 
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Questions'),
-        ),body: Column(
-          children: <Widget>[
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text('Questions'),
+          ),body: Column(
+          children: [
             Text(questions[questionSelected]),
             RaisedButton(
               child: Text('Anwser 1'),
@@ -40,7 +38,16 @@ class QuestionApp extends StatelessWidget{
             ),
           ],
         ),
-      )
+        )
     );
+  }
+}
+
+
+
+class QuestionApp extends StatefulWidget{
+  @override
+  QuestionAppState createState() {
+    return QuestionAppState();
   }
 }
