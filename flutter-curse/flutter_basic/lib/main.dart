@@ -4,6 +4,9 @@ main() => runApp(QuestionApp());
 
 class QuestionApp extends StatelessWidget{
 
+
+  var questionSelected = 0;
+
   void answer(){
     print('question answered');
   }
@@ -22,20 +25,18 @@ class QuestionApp extends StatelessWidget{
           title: Text('Questions'),
         ),body: Column(
           children: <Widget>[
-            Text(questions[0]),
+            Text(questions[questionSelected]),
             RaisedButton(
               child: Text('Anwser 1'),
               onPressed: answer,
             ),
             RaisedButton(
               child: Text('Anwser 2'),
-              onPressed: (){
-                print('answer 2');
-              },
+              onPressed: answer,
             ),
             RaisedButton(
               child: Text('Anwser 3'),
-              onPressed: ()=> print('answer 3'),
+              onPressed: answer,
             ),
           ],
         ),
