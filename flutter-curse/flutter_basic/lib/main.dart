@@ -29,9 +29,9 @@ class _QuestionAppState extends State<QuestionApp> {
       body: Column(
         children: [
           Question(questions[_questionSelected]),
-          Answer('Anwser 1'),
-          Answer('Anwser 2'),
-          Answer('Anwser 3'),
+          Answer('Anwser 1', _answer),
+          Answer('Anwser 2', _answer),
+          Answer('Anwser 3', _answer),
         ],
       ),
     ));
