@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/answer.dart';
 import 'package:flutter_basic/question.dart';
 
 main() => runApp(QuestionApp());
 
-class _QuestionAppState extends State<QuestionApp>{
+class _QuestionAppState extends State<QuestionApp> {
   var _questionSelected = 0;
-  void _answer(){
+
+  void _answer() {
     setState(() {
       _questionSelected++;
     });
     print('question answered');
   }
+
   @override
   Widget build(BuildContext context) {
     final questions = [
@@ -20,33 +23,22 @@ class _QuestionAppState extends State<QuestionApp>{
 
     return MaterialApp(
         home: Scaffold(
-          appBar: AppBar(
-            title: Text('Questions'),
-          ),body: Column(
-          children: [
-            Question(questions[_questionSelected]),
-            RaisedButton(
-              child: Text('Anwser 1'),
-              onPressed: _answer,
-            ),
-            RaisedButton(
-              child: Text('Anwser 2'),
-              onPressed: _answer,
-            ),
-            RaisedButton(
-              child: Text('Anwser 3'),
-              onPressed: _answer,
-            ),
-          ],
-        ),
-        )
-    );
+      appBar: AppBar(
+        title: Text('Questions'),
+      ),
+      body: Column(
+        children: [
+          Question(questions[_questionSelected]),
+          Answer('Anwser 1'),
+          Answer('Anwser 2'),
+          Answer('Anwser 3'),
+        ],
+      ),
+    ));
   }
 }
 
-
-
-class QuestionApp extends StatefulWidget{
+class QuestionApp extends StatefulWidget {
   @override
   _QuestionAppState createState() {
     return _QuestionAppState();
