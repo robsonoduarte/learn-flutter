@@ -11,14 +11,23 @@ class _QuestionAppState extends State<QuestionApp> {
     setState(() {
       _questionSelected++;
     });
-    print('question answered');
   }
 
   @override
   Widget build(BuildContext context) {
-    final questions = [
-      'How is your favorite color ?',
-      'How is your favorite pet ?',
+    final questionsAndAnswers = [
+      {
+        'text': 'How is your favorite color ?',
+        'awsers': ['Black', 'Red', 'Green', 'White']
+      },
+      {
+        'text': 'How is your favorite color ?',
+        'awsers': ['Dog', 'Cat', 'Duck', 'Elefant']
+      },
+      {
+        'text': 'How is your favorite Theacher ?',
+        'awsers': ['Robson', 'Ana Mara', 'Cida', 'Antonio']
+      }
     ];
 
     return MaterialApp(
@@ -28,7 +37,7 @@ class _QuestionAppState extends State<QuestionApp> {
       ),
       body: Column(
         children: [
-          Question(questions[_questionSelected]),
+          Question(questionsAndAnswers[_questionSelected]['text']),
           Answer('Anwser 1', _answer),
           Answer('Anwser 2', _answer),
           Answer('Anwser 3', _answer),
