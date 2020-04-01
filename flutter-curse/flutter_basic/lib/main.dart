@@ -47,7 +47,14 @@ class _QuestionAppState extends State<QuestionApp> {
                   Question(_questionsAndAnswers[_questionSelected]['question']),
                   ...answers.map((answer) => Answer(answer, _answer)).toList(),
                 ])
-              : null,
+              : Center(
+            child: Text(
+              'Congratulation',
+              style: TextStyle(
+                fontSize: 28,
+              ),
+            ),
+          ),
     ));
   }
 }
