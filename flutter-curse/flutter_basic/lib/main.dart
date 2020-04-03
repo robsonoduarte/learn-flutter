@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/answer.dart';
 import 'package:flutter_basic/question.dart';
+import 'package:flutter_basic/result.dart';
 
 main() => runApp(QuestionApp());
 
@@ -39,22 +40,17 @@ class _QuestionAppState extends State<QuestionApp> {
 
     return MaterialApp(
         home: Scaffold(
-          appBar: AppBar(
-            title: Text('Questions'),
-          ),
-          body: _hasQuestionSelected()
-              ? Column(children: [
-                  Question(_questionsAndAnswers[_questionSelected]['question']),
-                  ...answers.map((answer) => Answer(answer, _answer)).toList(),
-                ])
-              : Center(
-            child: Text(
-              'Congratulation',
-              style: TextStyle(
-                fontSize: 28,
-              ),
+      appBar: AppBar(
+        title: Text('Questions'),
+      ),
+      body: _hasQuestionSelected()
+          ? Column(children: [
+              Question(_questionsAndAnswers[_questionSelected]['question']),
+              ...answers.map((answer) => Answer(answer, _answer)).toList(),
+            ])
+          : Center(
+              child: Result('Congratulations'),
             ),
-          ),
     ));
   }
 }
