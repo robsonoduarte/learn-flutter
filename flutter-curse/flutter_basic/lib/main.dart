@@ -48,9 +48,7 @@ class _QuestionAppState extends State<QuestionApp> {
               Question(_questionsAndAnswers[_questionSelected]['question']),
               ...answers.map((answer) => Answer(answer, _answer)).toList(),
             ])
-          : Center(
-              child: Result('Congratulations'),
-            ),
+          : Result('Congratulations Bravox !'),
     ));
   }
 }
