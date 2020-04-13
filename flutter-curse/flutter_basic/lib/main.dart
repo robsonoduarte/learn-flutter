@@ -7,44 +7,52 @@ import 'package:flutter_basic/result.dart';
 main() => runApp(QuestionApp());
 
 class _QuestionAppState extends State<QuestionApp> {
-  var _questionSelected = 0;
-  final _questionsAndAnswers = const [
-    {
-      'question': 'How is your favorite color ?',
-      'answers': ['Black', 'Red', 'Green', 'White'],
-    },
-    {
-      'question': 'How is your favorite color ?',
-      'answers': ['Dog', 'Cat', 'Duck', 'Elefant'],
-    },
-    {
-      'question': 'How is your favorite Theacher ?',
-      'answers': ['Robson', 'Ana Mara', 'Cida', 'Antonio'],
-    }
-  ];
+  var quizSelected = 0;
+  List<Quiz> _quizzes;
+
+  _QuestionAppState() {
+    _quizzes = [
+      Quiz(Question("How is your favorite color ?"), [
+        Answer("Balck", _answer),
+        Answer("Red", _answer),
+        Answer("Green", _answer),
+        Answer("'White'", _answer),
+      ]),
+      Quiz(Question("How is your favorite Aninal ?"), [
+        Answer("Dog", _answer),
+        Answer("Cat", _answer),
+        Answer("Duck", _answer),
+        Answer("Elefant", _answer),
+      ]),
+      Quiz(Question("How is your favorite Theacher ?"), [
+        Answer("Leo", _answer),
+        Answer("Robson", _answer),
+        Answer("Ana Mara", _answer),
+        Answer("Aparecida", _answer),
+      ])
+    ];
+  }
 
   void _answer() {
     setState(() {
-      _questionSelected++;
+      quizSelected++;
     });
   }
 
-  _hasQuestionSelected() {
-    return _questionSelected < _questionsAndAnswers.length;
+  _hasQuizSelected() {
+    return quizSelected < _quizzes.length;
   }
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
         home: Scaffold(
-      appBar: AppBar(
-        title: Text('Questions'),
-      ),
-      body: _hasQuestionSelected()
-          ? Quiz(questionsAndAnswers: _questionsAndAnswers, questionSelected : _questionSelected, answer: _answer)
-          : Result('Congratulations Bravox !'),
-    ));
+            appBar: AppBar(
+              title: Text('Quiz'),
+            ),
+            body: _hasQuizSelected()
+                ? _quizzes.elementAt(quizSelected)
+                : Result('Congratulations Bravox !')));
   }
 }
 
