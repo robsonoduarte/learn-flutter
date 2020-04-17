@@ -8,34 +8,36 @@ main() => runApp(QuestionApp());
 
 class _QuestionAppState extends State<QuestionApp> {
   var quizSelected = 0;
+  var totalScore = 0;
   List<Quiz> _quizzes;
 
   _QuestionAppState() {
     _quizzes = [
       Quiz(Question("How is your favorite color ?"), [
-        Answer("Balck", _answer),
-        Answer("Red", _answer),
-        Answer("Green", _answer),
-        Answer("'White'", _answer),
+        Answer("Balck", 5, _answer),
+        Answer("Red", 10, _answer),
+        Answer("Green", 7,_answer),
+        Answer("'White'",4, _answer),
       ]),
       Quiz(Question("How is your favorite Aninal ?"), [
-        Answer("Dog", _answer),
-        Answer("Cat", _answer),
-        Answer("Duck", _answer),
-        Answer("Elefant", _answer),
+        Answer("Dog", 10, _answer),
+        Answer("Cat", 8, _answer),
+        Answer("Duck", 6, _answer),
+        Answer("Elefant",0 , _answer),
       ]),
       Quiz(Question("How is your favorite Theacher ?"), [
-        Answer("Leo", _answer),
-        Answer("Robson", _answer),
-        Answer("Ana Mara", _answer),
-        Answer("Aparecida", _answer),
+        Answer("Leo", 10,  _answer),
+        Answer("Robson", 8,  _answer),
+        Answer("Ana Mara", 0,_answer),
+        Answer("Aparecida", 7, _answer),
       ])
     ];
   }
 
-  void _answer() {
+  void _answer(int score) {
     setState(() {
       quizSelected++;
+      totalScore += score;
     });
   }
 
@@ -52,7 +54,7 @@ class _QuestionAppState extends State<QuestionApp> {
             ),
             body: _hasQuizSelected()
                 ? _quizzes.elementAt(quizSelected)
-                : Result('Congratulations Bravox !')));
+                : Result('Your Total Score is $totalScore')));
   }
 }
 
