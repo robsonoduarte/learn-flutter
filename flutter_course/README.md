@@ -1,4 +1,4 @@
-# [Flutter Curse](https://www.udemy.com/course/curso-flutter)
+# [Flutter Course](https://www.udemy.com/course/curso-flutter)
 
 [COD3R](https://www.cod3r.com.br/) Brazilian Course by [Leonardo Leitão](https://twitter.com/leonardomleitao)
 
