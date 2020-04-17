@@ -1,6 +1,6 @@
 # Quiz App
 
-A simple application that we made in the first module of the course to take the first steps in Flutter.
+A simple application that we made in the third module of the course to take the first steps in Flutter.
 
 ### To Run:
 
