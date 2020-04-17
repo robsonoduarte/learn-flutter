@@ -1,6 +1,6 @@
-# Dart's Resume
+# Dart Quick Summary
 
-One kick resume of Dart to start the curse
+A quick dart summary before starting the course
 
-* [Resume 1](https://github.com/robsonoduarte/learn-flutter/blob/master/flutter-curse/dart_resume/resume_1.dart)
-* [Resume 2](https://github.com/robsonoduarte/learn-flutter/blob/master/flutter-curse/dart_resume/resume_2.dart)
+* [Summary 1](https://github.com/robsonoduarte/learn-flutter/blob/master/flutter-curse/dart_resume/resume_1.dart)
+* [Summary 2](https://github.com/robsonoduarte/learn-flutter/blob/master/flutter-curse/dart_resume/resume_2.dart)
