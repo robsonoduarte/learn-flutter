@@ -17,7 +17,7 @@ git clone https://github.com/robsonoduarte/learn-flutter.git
 
 ![image](https://user-images.githubusercontent.com/797845/79604730-02140300-80c5-11ea-8094-c9453e0bd971.png)
 ![image](https://user-images.githubusercontent.com/797845/79604784-1bb54a80-80c5-11ea-842c-e10a535e613c.png)
-![image](https://user-images.githubusercontent.com/797845/79604806-253eb280-80c5-11ea-8427-23165e7e9d23.png)
+![image](https://user-images.githubusercontent.com/797845/79605827-fcb7b800-80c6-11ea-88af-84d1ba469c02.png)
 
 
 #### Run App:
