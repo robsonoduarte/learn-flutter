@@ -11,3 +11,9 @@ git clone https://github.com/robsonoduarte/learn-flutter.git
 ```
 
 #### Import Project:
+
+
+### Add/Run AVD:
+
+
+#### Run App:
