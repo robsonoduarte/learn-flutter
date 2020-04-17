@@ -41,6 +41,13 @@ class _QuestionAppState extends State<QuestionApp> {
     });
   }
 
+  void _restartQuiz(){
+    setState(() {
+      quizSelected = 0;
+      totalScore = 0;
+    });
+  }
+
   _hasQuizSelected() {
     return quizSelected < _quizzes.length;
   }
@@ -54,7 +61,7 @@ class _QuestionAppState extends State<QuestionApp> {
             ),
             body: _hasQuizSelected()
                 ? _quizzes.elementAt(quizSelected)
-                : Result('Your Total Score is $totalScore')));
+                : Result('Your Total Score is $totalScore', _restartQuiz)));
   }
 }
 
