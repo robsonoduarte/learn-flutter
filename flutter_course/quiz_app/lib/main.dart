@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basic/answer.dart';
-import 'package:flutter_basic/question.dart';
-import 'package:flutter_basic/quiz.dart';
-import 'package:flutter_basic/result.dart';
+import 'package:quiz_app/answer.dart';
+import 'package:quiz_app/question.dart';
+import 'package:quiz_app/quiz.dart';
+import 'package:quiz_app/result.dart';
 
 main() => runApp(QuestionApp());
 
@@ -14,10 +14,10 @@ class _QuestionAppState extends State<QuestionApp> {
   _QuestionAppState() {
     _quizzes = [
       Quiz(Question("How is your favorite color ?"), [
-        Answer("Balck", 5, _answer),
+        Answer("Black", 5, _answer),
         Answer("Red", 10, _answer),
         Answer("Green", 7,_answer),
-        Answer("'White'",4, _answer),
+        Answer("White",4, _answer),
       ]),
       Quiz(Question("How is your favorite Aninal ?"), [
         Answer("Dog", 10, _answer),

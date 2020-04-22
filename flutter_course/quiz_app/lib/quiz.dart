@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_basic/question.dart';
+import 'package:quiz_app/question.dart';
 
 import 'answer.dart';
 
