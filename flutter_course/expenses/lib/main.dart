@@ -44,14 +44,21 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     Container(
-                      child: Text(tr.value.toString()),
+                      child: Text(
+                          tr.value.toString(),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.purple
+                        ),
+                      ),
                       margin: EdgeInsets.symmetric(
                         horizontal: 15,
                         vertical: 10
                       ),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.black,
+                          color: Colors.purple,
                           width: 2
                         )
                       ),
