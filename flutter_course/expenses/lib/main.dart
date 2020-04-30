@@ -1,6 +1,7 @@
 import 'package:expenses/model/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 main() => runApp(ExpensesApp());
 
@@ -44,6 +45,17 @@ class HomePage extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Text(tr.value.toString()),
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 10
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 2
+                        )
+                      ),
+                      padding: EdgeInsets.all(10),
                     ),
                     Column(
                       children: <Widget>[
