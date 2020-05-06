@@ -2,6 +2,7 @@ import 'package:expenses/model/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:intl/intl.dart';
 
 main() => runApp(ExpensesApp());
 
@@ -45,7 +46,7 @@ class HomePage extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Text(
-                          tr.value.toString(),
+                         "R\$ ${tr.value.toStringAsFixed(2)}",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -73,7 +74,7 @@ class HomePage extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text(tr.date.toString(),
+                        Text(DateFormat('d MMM y').format(tr.date),
                           style: TextStyle(
                             color: Colors.grey
                           ),
