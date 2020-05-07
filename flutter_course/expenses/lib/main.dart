@@ -16,6 +16,10 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
+
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
+
   final _transactions = [
     Transaction(id: '1', title: 'Beer', value: 8.5, date: DateTime.now()),
     Transaction(id: '2', title: 'Sofa', value: 2.0, date: DateTime.now()),
@@ -92,11 +96,13 @@ class HomePage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   TextField(
+                    controller: titleController,
                     decoration: InputDecoration(
                       labelText: "Title"
                     ),
                   ),
                   TextField(
+                    controller: valueController,
                     decoration: InputDecoration(
                       labelText: "Value"
                     ),
@@ -107,7 +113,10 @@ class HomePage extends StatelessWidget {
                       FlatButton(
                         child: Text("New Transaction"),
                         textColor: Colors.purple,
-                        onPressed: () => {},
+                        onPressed: () {
+                          print(titleController.text);
+                          print(valueController.text);
+                        },
                       ),
                     ],
                   )
