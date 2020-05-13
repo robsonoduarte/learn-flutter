@@ -1,7 +1,7 @@
 import 'package:expenses/components/transaction_form.dart';
 import 'package:expenses/components/transactions.dart';
 import 'package:expenses/model/model.dart';
-import 'package:expenses/repo/transaction_repo.dart';
+import 'package:expenses/components/transactions_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          TransactionRepo()
+          TransactionUser()
         ],
       ),
     );
