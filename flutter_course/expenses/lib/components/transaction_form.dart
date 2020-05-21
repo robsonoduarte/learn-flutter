@@ -45,6 +45,7 @@ class _TransactionFormState extends State<TransactionForm> {
               controller: valueController,
               decoration: InputDecoration(labelText: "Value"),
             ),
+/*
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
@@ -55,6 +56,7 @@ class _TransactionFormState extends State<TransactionForm> {
                 ),
               ],
             )
+*/
           ],
         ),
       ),

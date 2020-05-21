@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
           value: value,
           date: DateTime.now()));
     });
+    Navigator.of(context).pop();
   }
 
   @override
