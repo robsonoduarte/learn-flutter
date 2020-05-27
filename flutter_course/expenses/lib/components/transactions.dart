@@ -25,11 +25,11 @@ class Transactions extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.purple),
+                        color: Theme.of(context).primaryColor),
                   ),
                   margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.purple, width: 2)),
+                      border: Border.all(color: Theme.of(context).primaryColor, width: 2)),
                   padding: EdgeInsets.all(10),
                 ),
                 Column(
