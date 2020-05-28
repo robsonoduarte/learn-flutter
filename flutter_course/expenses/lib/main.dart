@@ -40,9 +40,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _transactions = [
-    Transaction(id: '1', title: 'Beer', value: 8.5, date: DateTime.now()),
-    Transaction(id: '2', title: 'Sofa', value: 2.0, date: DateTime.now()),
+  final List<Transaction> _transactions = [
+/*    Transaction(id: '1', title: 'Beer', value: 8.5, date: DateTime.now()),
+    Transaction(id: '2', title: 'Sofa', value: 2.0, date: DateTime.now()),*/
   ];
 
   _openTransactionFormModal(BuildContext context) {
