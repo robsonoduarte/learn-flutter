@@ -22,10 +22,7 @@ class Transactions extends StatelessWidget {
                 Container(
                   child: Text(
                     "R\$ ${tr.value.toStringAsFixed(2)}",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor),
+                    style: Theme.of(context).textTheme.title,
                   ),
                   margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   decoration: BoxDecoration(
