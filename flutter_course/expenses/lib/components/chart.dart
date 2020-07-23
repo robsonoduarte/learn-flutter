@@ -1,3 +1,4 @@
+import 'package:expenses/components/chart_bar.dart';
 import 'package:expenses/model/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,27 +16,39 @@ class Chart extends StatelessWidget {
         Duration(days: index),
       );
 
-      var totalSum = recentTransaction
+      var totalSum = 0.0;
+
+      recentTransaction
           .where((t) => t.date.day == weekDay.day)
           .where((t) => t.date.month == weekDay.month)
           .where((t) => t.date.year == weekDay.year)
           .map((e) => e.value)
-          .reduce((a, b) => a + b);
+          .forEach((element) => totalSum += element);
 
       return {
         'day': DateFormat.E().format(weekDay)[0],
-        'values': totalSum,
+        'value': totalSum,
       };
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    throw Card(
+    groupedTransactions.forEach((tr) {
+      print(tr);
+    });
+
+    return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
       child: Row(
-        children: <Widget>[],
+        children: groupedTransactions.map((e) {
+          return ChartBar(
+            label: e['day'],
+            value: e['value'],
+            percentage: 0,
+          );
+        }).toList(),
       ),
     );
   }
