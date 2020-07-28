@@ -5,5 +5,6 @@
 * [Example App](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/example)
 * [Dart Quick Summary](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/dart_quick_summary)
 * [Quiz App](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/quiz_app)
+* [Flexible | Expanded](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/flexible_expanded)
 
 
