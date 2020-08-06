@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 class TransactionForm extends StatefulWidget {
   final void Function(String, double) onSubmit;
@@ -45,18 +46,35 @@ class _TransactionFormState extends State<TransactionForm> {
               controller: valueController,
               decoration: InputDecoration(labelText: "Value"),
             ),
-/*
+            Container(
+              height: 70,
+              child: Row(
+                children: <Widget>[
+                  Text('No Date Selected'),
+                  FlatButton(
+                    textColor: Theme.of(context).primaryColor,
+                    child: Text(
+                      'Select Data',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {},
+                  )
+                ],
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                FlatButton(
+                RaisedButton(
                   child: Text("New Transaction"),
-                  textColor: Colors.purple,
+                  color: Theme.of(context).primaryColor,
+                  textColor: Theme.of(context).textTheme.button.color,
                   onPressed: _onSubmit,
                 ),
               ],
             )
-*/
           ],
         ),
       ),
