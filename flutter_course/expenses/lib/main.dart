@@ -45,44 +45,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Transaction> _transactions = [
-    Transaction(
-      id: '0',
-      title: 'Beer Brazuca',
-      value: 8.5,
-      date: DateTime.now().subtract(Duration(days: 33)),
-    ),
-    Transaction(
-      id: '1',
-      title: 'Beer',
-      value: 8.5,
-      date: DateTime.now().subtract(Duration(days: 3)),
-    ),
-    Transaction(
-      id: '2',
-      title: 'Sofa',
-      value: 2.0,
-      date: DateTime.now().subtract(Duration(days: 4)),
-    ),
-    Transaction(
-      id: '2',
-      title: 'Pia',
-      value: 2.0000,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '2',
-      title: 'Cardeno',
-      value: 2.0,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '2',
-      title: 'Cana',
-      value: 2.0,
-      date: DateTime.now(),
-    ),
-  ];
+  final List<Transaction> _transactions = [];
 
   List<Transaction> get _recentTransactions {
     return _transactions.where((element) {
@@ -99,7 +62,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime dt) {
     setState(() {
       _transactions.add(Transaction(
           id: Random(DateTime.now().millisecondsSinceEpoch)
@@ -107,7 +70,7 @@ class _HomePageState extends State<HomePage> {
               .toString(),
           title: title,
           value: value,
-          date: DateTime.now()));
+          date: dt));
     });
     Navigator.of(context).pop();
   }
