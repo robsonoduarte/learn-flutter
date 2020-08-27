@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -20,25 +19,29 @@ class Products with ChangeNotifier {
     return _items.where((prod) => prod.isFavorite).toList();
   }
 
-  void addProduct(Product newProduct) {
-    http.post(
+  Future<void> addProduct(Product newProduct) {
+    return http
+        .post(
       "https://flutter-curse.firebaseio.com/products.json",
-      body: json.encode({
-        'title': newProduct.title,
-        'description': newProduct.description,
-        'price': newProduct.price,
-        'imageUrl': newProduct.imageUrl,
-        'isFavorite': newProduct.isFavorite,
-      }),
-    );
-
-    _items.add(Product(
-        id: Random().nextDouble().toString(),
-        title: newProduct.title,
-        description: newProduct.description,
-        price: newProduct.price,
-        imageUrl: newProduct.imageUrl));
-    notifyListeners();
+      body: json.encode(
+        {
+          'title': newProduct.title,
+          'description': newProduct.description,
+          'price': newProduct.price,
+          'imageUrl': newProduct.imageUrl,
+          'isFavorite': newProduct.isFavorite,
+        },
+      ),
+    )
+        .then((response) {
+      _items.add(Product(
+          id: json.decode(response.body)['name'],
+          title: newProduct.title,
+          description: newProduct.description,
+          price: newProduct.price,
+          imageUrl: newProduct.imageUrl));
+      notifyListeners();
+    });
   }
 
   void updateProduct(Product product) {
