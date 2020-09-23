@@ -19,9 +19,8 @@ class Products with ChangeNotifier {
     return _items.where((prod) => prod.isFavorite).toList();
   }
 
-  Future<void> addProduct(Product newProduct) {
-    return http
-        .post(
+  Future<void> addProduct(Product newProduct) async {
+    final response = await http.post(
       "https://flutter-curse.firebaseio.com/products.json",
       body: json.encode(
         {
@@ -32,16 +31,16 @@ class Products with ChangeNotifier {
           'isFavorite': newProduct.isFavorite,
         },
       ),
-    )
-        .then((response) {
-      _items.add(Product(
-          id: json.decode(response.body)['name'],
-          title: newProduct.title,
-          description: newProduct.description,
-          price: newProduct.price,
-          imageUrl: newProduct.imageUrl));
-      notifyListeners();
-    });
+    );
+
+    _items.add(Product(
+        id: json.decode(response.body)['name'],
+        title: newProduct.title,
+        description: newProduct.description,
+        price: newProduct.price,
+        imageUrl: newProduct.imageUrl));
+
+    notifyListeners();
   }
 
   void updateProduct(Product product) {
