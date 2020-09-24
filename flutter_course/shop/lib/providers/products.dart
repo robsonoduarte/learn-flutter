@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import './product.dart';
-import '../data/dummy_data.dart';
 
 class Products with ChangeNotifier {
   final _url = "https://flutter-curse.firebaseio.com/products.json";
 
-  List<Product> _items = DUMMY_PRODUCTS;
+  List<Product> _items = [];
 
   List<Product> get items => [..._items];
 
@@ -34,7 +33,6 @@ class Products with ChangeNotifier {
         },
       ),
     );
-
     _items.add(Product(
         id: json.decode(response.body)['name'],
         title: newProduct.title,
@@ -47,7 +45,21 @@ class Products with ChangeNotifier {
 
   Future<void> loadProducts() async {
     final response = await http.get(_url);
-    print(response.body);
+
+    Map<String, dynamic> data = json.decode(response.body);
+
+    _items.clear();
+    data.forEach((id, product) {
+      _items.add(Product(
+          id: id,
+          title: product["title"],
+          description: product["description"],
+          price: product["price"],
+          imageUrl: product["imageUrl"],
+          isFavorite: product['isFavorite']));
+    });
+    notifyListeners();
+    return Future.value();
   }
 
   void updateProduct(Product product) {
