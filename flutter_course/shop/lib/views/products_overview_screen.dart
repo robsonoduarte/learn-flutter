@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widgets/product_grid.dart';
-import '../widgets/badge.dart';
-import '../widgets/app_drawer.dart';
+import 'package:shop/providers/products.dart';
+
 import '../providers/cart.dart';
 import '../utils/app_routes.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/badge.dart';
+import '../widgets/product_grid.dart';
 
 enum FilterOptions {
   Favorite,
@@ -18,6 +20,12 @@ class ProductOverviewScreen extends StatefulWidget {
 
 class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   bool _showFavoriteOnly = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<Products>(context, listen: false).loadProducts();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,8 @@ import './product.dart';
 import '../data/dummy_data.dart';
 
 class Products with ChangeNotifier {
+  final _url = "https://flutter-curse.firebaseio.com/products.json";
+
   List<Product> _items = DUMMY_PRODUCTS;
 
   List<Product> get items => [..._items];
@@ -21,7 +23,7 @@ class Products with ChangeNotifier {
 
   Future<void> addProduct(Product newProduct) async {
     final response = await http.post(
-      "https://flutter-curse.firebaseio.com/products.json",
+      _url,
       body: json.encode(
         {
           'title': newProduct.title,
@@ -41,6 +43,11 @@ class Products with ChangeNotifier {
         imageUrl: newProduct.imageUrl));
 
     notifyListeners();
+  }
+
+  Future<void> loadProducts() async {
+    final response = await http.get(_url);
+    print(response.body);
   }
 
   void updateProduct(Product product) {
