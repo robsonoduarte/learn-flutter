@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import './product.dart';
 
 class Products with ChangeNotifier {
-  final _url = "https://flutter-curse.firebaseio.com/products.json";
+  final _url = "https://flutter-curse.firebaseio.com/products";
 
   List<Product> _items = [];
 
@@ -22,7 +22,7 @@ class Products with ChangeNotifier {
 
   Future<void> addProduct(Product newProduct) async {
     final response = await http.post(
-      _url,
+      "$_url.json",
       body: json.encode(
         {
           'title': newProduct.title,
@@ -44,7 +44,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> loadProducts() async {
-    final response = await http.get(_url);
+    final response = await http.get("$_url.json");
 
     Map<String, dynamic> data = json.decode(response.body);
 
@@ -62,13 +62,20 @@ class Products with ChangeNotifier {
     return Future.value();
   }
 
-  void updateProduct(Product product) {
+  Future<void> updateProduct(Product product) async {
     if (product == null || product.id == null) {
       return;
     }
 
     final index = _items.indexWhere((prod) => prod.id == product.id);
     if (index >= 0) {
+      await http.patch("$_url/${product.id}.json",
+          body: json.encode({
+            'title': product.title,
+            'description': product.description,
+            'price': product.price,
+            'imageUrl': product.imageUrl,
+          }));
       _items[index] = product;
       notifyListeners();
     }
