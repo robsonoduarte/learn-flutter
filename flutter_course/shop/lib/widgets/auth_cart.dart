@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/providers/auth.dart';
 
 enum AuthMode { Signup, Login }
 
@@ -15,7 +17,7 @@ class _AuthCardState extends State<AuthCard> {
   final _passwordController = TextEditingController();
   var _authData = {'email': '', 'password': ''};
 
-  void _submit() {
+  Future<void> _submit() async {
     if (!_form.currentState.validate()) {
       return;
     }
@@ -25,10 +27,12 @@ class _AuthCardState extends State<AuthCard> {
 
     _form.currentState.save();
 
+    Auth auth = Provider.of(context, listen: false);
+
     if (_authMode == AuthMode.Login) {
-      // Login
+      await auth.signin(_authData['email'], _authData['password']);
     } else {
-      // Resgistro
+      await auth.signup(_authData['email'], _authData['password']);
     }
 
     setState(() {
@@ -81,7 +85,7 @@ class _AuthCardState extends State<AuthCard> {
                 controller: _passwordController,
                 obscureText: true,
                 validator: (value) {
-                  if (value.isEmpty || value.length > 5) {
+                  if (value.isEmpty || value.length > 6) {
                     return "password no valid";
                   }
                   return null;
