@@ -9,7 +9,7 @@ class Auth with ChangeNotifier {
 
   Future<void> signin(String email, String password) async {
     final response = await post(
-      '${_url}signInWithPassword?key=AIzaSyAwoqNX-Y0_NdQRfNk6vCMo3azmMcAYuzs',
+      '${_url}signInWithPassword?key=',
       body: json.encode({
         "email": email,
         "password": password,
@@ -23,7 +23,7 @@ class Auth with ChangeNotifier {
 
   Future<void> signup(String email, String password) async {
     final response = await post(
-      '${_url}signUp?key=AIzaSyAwoqNX-Y0_NdQRfNk6vCMo3azmMcAYuzs',
+      '${_url}signUp?key=',
       body: json.encode({
         "email": email,
         "password": password,
