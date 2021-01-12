@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shop/exceptions/firebase_exception.dart';
 
 class Auth with ChangeNotifier {
   static const _url = 'https://identitytoolkit.googleapis.com/v1/accounts:';
@@ -16,7 +17,12 @@ class Auth with ChangeNotifier {
         "returnSecureToken": true,
       }),
     );
-    print(response.body);
+
+    final responseBody = json.decode(response.body);
+
+    if (responseBody['error'] != null) {
+      throw AuthException(responseBody['error']['message']);
+    }
 
     return Future.value();
   }
@@ -30,7 +36,12 @@ class Auth with ChangeNotifier {
         "returnSecureToken": true,
       }),
     );
-    print(response.body);
+
+    final responseBody = json.decode(response.body);
+
+    if (responseBody['error'] != null) {
+      throw AuthException(responseBody['error']['message']);
+    }
 
     return Future.value();
   }
