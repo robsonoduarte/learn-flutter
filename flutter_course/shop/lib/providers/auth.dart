@@ -8,7 +8,23 @@ import 'package:shop/exceptions/firebase_exception.dart';
 class Auth with ChangeNotifier {
   static const _url = 'https://identitytoolkit.googleapis.com/v1/accounts:';
 
-  Future<void> signin(String email, String password) async {
+  String _token;
+  DateTime _expiryTokenDate;
+
+  bool get isAuth {
+    return token != null;
+  }
+
+  String get token {
+    if (_token != null &&
+        _expiryTokenDate != null &&
+        _expiryTokenDate.isAfter(DateTime.now())) {
+      return _token;
+    }
+    return null;
+  }
+
+  Future<void> signIn(String email, String password) async {
     final response = await post(
       '${_url}signInWithPassword?key=',
       body: json.encode({
@@ -24,10 +40,14 @@ class Auth with ChangeNotifier {
       throw AuthException(responseBody['error']['message']);
     }
 
+    _token = responseBody['idTodken'];
+    _expiryTokenDate = DateTime.now()
+        .add(Duration(seconds: int.parse(responseBody['expiresIn'])));
+
     return Future.value();
   }
 
-  Future<void> signup(String email, String password) async {
+  Future<void> signUp(String email, String password) async {
     final response = await post(
       '${_url}signUp?key=',
       body: json.encode({
@@ -42,6 +62,10 @@ class Auth with ChangeNotifier {
     if (responseBody['error'] != null) {
       throw AuthException(responseBody['error']['message']);
     }
+
+    _token = responseBody['idTodken'];
+    _expiryTokenDate = DateTime.now()
+        .add(Duration(seconds: int.parse(responseBody['expiresIn'])));
 
     return Future.value();
   }
