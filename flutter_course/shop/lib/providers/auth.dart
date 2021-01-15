@@ -40,9 +40,11 @@ class Auth with ChangeNotifier {
       throw AuthException(responseBody['error']['message']);
     }
 
-    _token = responseBody['idTodken'];
+    _token = responseBody['idToken'];
     _expiryTokenDate = DateTime.now()
         .add(Duration(seconds: int.parse(responseBody['expiresIn'])));
+
+    notifyListeners();
 
     return Future.value();
   }
@@ -63,9 +65,11 @@ class Auth with ChangeNotifier {
       throw AuthException(responseBody['error']['message']);
     }
 
-    _token = responseBody['idTodken'];
+    _token = responseBody['idToken'];
     _expiryTokenDate = DateTime.now()
         .add(Duration(seconds: int.parse(responseBody['expiresIn'])));
+
+    notifyListeners();
 
     return Future.value();
   }
