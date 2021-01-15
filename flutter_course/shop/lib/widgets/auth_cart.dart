@@ -50,9 +50,9 @@ class _AuthCardState extends State<AuthCard> {
 
     try {
       if (_authMode == AuthMode.Login) {
-        await auth.signin(_authData['email'], _authData['password']);
+        await auth.signIn(_authData['email'], _authData['password']);
       } else {
-        await auth.signup(_authData['email'], _authData['password']);
+        await auth.signUp(_authData['email'], _authData['password']);
       }
     } on AuthException catch (error) {
       _showErrorDialog(error.toString());
