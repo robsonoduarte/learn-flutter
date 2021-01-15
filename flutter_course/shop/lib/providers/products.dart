@@ -8,7 +8,11 @@ import './product.dart';
 class Products with ChangeNotifier {
   final _url = "https://flutter-curse.firebaseio.com/products";
 
+  String _token;
+
   List<Product> _items = [];
+
+  Products(this._token, this._items);
 
   List<Product> get items => [..._items];
 
@@ -44,7 +48,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> loadProducts() async {
-    final response = await http.get("$_url.json");
+    final response = await http.get("$_url.json?auth=$_token");
 
     Map<String, dynamic> data = json.decode(response.body);
 
