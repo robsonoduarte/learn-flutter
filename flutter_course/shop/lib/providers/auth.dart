@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:shop/data/store.dart';
 import 'package:shop/exceptions/firebase_exception.dart';
 
 class Auth with ChangeNotifier {
@@ -45,8 +44,6 @@ class Auth with ChangeNotifier {
     _token = responseBody['idToken'];
     _expiryTokenDate = DateTime.now()
         .add(Duration(seconds: int.parse(responseBody['expiresIn'])));
-
-    Store.saveMap("userDate", {"token": _token});
 
     notifyListeners();
 
