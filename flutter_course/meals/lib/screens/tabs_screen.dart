@@ -1,35 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:meals/components/main_drawer.dart';
+import 'package:meals/screens/categories_screen.dart';
 import 'package:meals/screens/favorite_screen.dart';
 
-import 'categories_screen.dart';
+class TabsScreen extends StatefulWidget {
+  @override
+  State<TabsScreen> createState() => _TabsScreenState();
+}
 
-class TabsScreen extends StatelessWidget {
+class _TabsScreenState extends State<TabsScreen> {
+  int _selectedScreenIndex = 0;
+
+  final _screens = [
+    {
+      'title': 'Lista de Categoria',
+      'screen': CategoriesScreen(),
+    },
+    {
+      'title': 'Meus Favoritos',
+      'screen': FavoriteScreen(),
+    },
+  ];
+
+  _selectScreen(int index) {
+    setState(() {
+      _selectedScreenIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Vamos conzinhar?'),
-          bottom: const TabBar(
-            tabs: [
-              Tab(
-                icon: Icon(Icons.category),
-                text: 'categorias',
-              ),
-              Tab(
-                icon: Icon(Icons.favorite),
-                text: 'Favoritos',
-              )
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          _screens[_selectedScreenIndex]['title'],
+        ),
+      ),
+      drawer: MainDrawer(),
+      body: _screens[_selectedScreenIndex]['screen'],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectScreen,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        unselectedItemColor: Colors.white,
+        selectedItemColor: Theme.of(context).colorScheme.secondary,
+        currentIndex: _selectedScreenIndex,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: 'Categorias',
           ),
-        ),
-        body: TabBarView(
-          children: [
-            CategoriesScreen(),
-            FavoriteScreen(),
-          ],
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favoritos',
+          )
+        ],
       ),
     );
   }
