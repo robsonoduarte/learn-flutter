@@ -11,9 +11,17 @@ class MealItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed(
+        Navigator.of(context)
+            .pushNamed(
           AppRoutes.mealDetail,
           arguments: meal,
+        )
+            .then(
+          (value) {
+            if (value != null) {
+              print(value);
+            }
+          },
         );
       },
       child: Card(
