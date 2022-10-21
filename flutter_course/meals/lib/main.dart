@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals/data/dummy_data.dart';
+import 'package:meals/models/meal.dart';
 import 'package:meals/models/settings.dart';
 import 'package:meals/screens/categories_meals_screen.dart';
 import 'package:meals/screens/meal_detail_screen.dart';
@@ -19,6 +20,8 @@ class _MyAppState extends State<MyApp> {
 
   var _avaibleMeals = dummyMeals;
 
+  List<Meal> _favoritesMeals = [];
+
   void _filterMeals(Settings settings) {
     setState(() {
       this.settings = settings;
@@ -32,6 +35,14 @@ class _MyAppState extends State<MyApp> {
             !filterVegan &&
             !filterVegetarian;
       }).toList();
+    });
+  }
+
+  void _toggleFavorite(Meal meal) {
+    setState(() {
+      _favoritesMeals.contains(meal)
+          ? _favoritesMeals.remove(meal)
+          : _favoritesMeals.add(meal);
     });
   }
 
@@ -54,10 +65,10 @@ class _MyAppState extends State<MyApp> {
             ),
       ),
       routes: {
-        AppRoutes.home: (context) => TabsScreen(),
+        AppRoutes.home: (context) => TabsScreen(_favoritesMeals),
         AppRoutes.categoriesMeals: (context) =>
             CategoriesMealsScreen(_avaibleMeals),
-        AppRoutes.mealDetail: (context) => MealDatailScreen(),
+        AppRoutes.mealDetail: (context) => MealDetailScreen(_toggleFavorite),
         AppRoutes.settings: (context) => SettingsScreen(settings, _filterMeals),
       },
     );
