@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_two/components/cart_item.dart';
 import 'package:shop_two/models/cart.dart';
+import 'package:shop_two/models/order_list.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class CartPage extends StatelessWidget {
                   Chip(
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     label: Text(
-                      'R\$ ${context.read<Cart>().total}',
+                      'R\$ ${context.watch<Cart>().total.toStringAsFixed(2)}',
                       style: TextStyle(
                         color:
                             Theme.of(context).primaryTextTheme.headline6?.color,
@@ -50,7 +51,12 @@ class CartPage extends StatelessWidget {
                         color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<OrderList>().addOrder(
+                            context.read<Cart>(),
+                          );
+                      context.read<Cart>().clear();
+                    },
                     child: const Text('Compar'),
                   ),
                 ],
