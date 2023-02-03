@@ -7,9 +7,9 @@ import 'package:shop_two/models/product.dart';
 class Cart with ChangeNotifier {
   Map<String, CartItem> _items = {};
 
-  get items => {..._items};
-  get itemsCount => _items.length;
-  get total {
+  Map<String, CartItem> get items => {..._items};
+  int get itemsCount => _items.length;
+  double get total {
     double total = 0.0;
     _items.forEach((key, value) {
       total += value.price * value.quantity;
