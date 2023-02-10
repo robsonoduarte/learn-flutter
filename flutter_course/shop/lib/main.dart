@@ -1,54 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop/providers/auth.dart';
-import 'package:shop/views/auth_home_screen.dart';
+import 'package:shop/models/cart.dart';
+import 'package:shop/models/order_list.dart';
+import 'package:shop/models/product_list.dart';
+import 'package:shop/pages/cart_page.dart';
+import 'package:shop/pages/order_page.dart';
+import 'package:shop/pages/product_detail_page.dart';
+import 'package:shop/pages/products_overview_page.dart';
+import 'package:shop/pages/products_page.dart';
+import 'package:shop/utils/app_routes.dart';
 
-import './providers/cart.dart';
-import './providers/orders.dart';
-import './providers/products.dart';
-import './utils/app_routes.dart';
-import './views/cart_screen.dart';
-import './views/orders_screen.dart';
-import './views/product_detail_screen.dart';
-import './views/product_form_screen.dart';
-import './views/products_screen.dart';
-
-void main() => runApp(MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => new Auth(),
-        ),
-        ChangeNotifierProxyProvider<Auth, Products>(
-          create: (_) => Products(null, []),
-          update: (context, auth, prod) => new Products(auth.token, prod.items),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => new Cart(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => new Orders(),
-        ),
+        ChangeNotifierProvider(create: (_) => ProductList()),
+        ChangeNotifierProvider(create: (_) => Cart()),
+        ChangeNotifierProvider(create: (_) => OrderList()),
       ],
       child: MaterialApp(
-        title: 'Minha Loja',
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.purple,
-          accentColor: Colors.deepOrange,
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.purple,
+            accentColor: Colors.deepOrange,
+          ),
           fontFamily: 'Lato',
         ),
-        // home: ProductOverviewScreen(),
+        //home: const ProductsOverviewPage(),
         routes: {
-          AppRoutes.AUTH_HOME: (ctx) => AuthOrHome(),
-          AppRoutes.PRODUCT_DETAIL: (ctx) => ProductDetailScreen(),
-          AppRoutes.CART: (ctx) => CartScreen(),
-          AppRoutes.ORDERS: (ctx) => OrdersScreen(),
-          AppRoutes.PRODUCTS: (ctx) => ProductsScreen(),
-          AppRoutes.PRODUCT_FORM: (ctx) => ProductFormScreen(),
+          AppRoutes.home: (context) => const ProductsOverviewPage(),
+          AppRoutes.productDetail: (context) => const ProductDetailPage(),
+          AppRoutes.cart: (context) => const CartPage(),
+          AppRoutes.orders: (context) => const OrdersPage(),
+          AppRoutes.products: (context) => const ProductsPage(),
         },
       ),
     );
