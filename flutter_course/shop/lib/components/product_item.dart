@@ -17,12 +17,14 @@ class ProductItem extends StatelessWidget {
         child: Row(
           children: [
             IconButton(
-              onPressed: () {},
+              color: Theme.of(context).primaryColor,
               icon: const Icon(Icons.edit),
+              onPressed: () {},
             ),
             IconButton(
-              onPressed: () {},
+              color: Theme.of(context).errorColor,
               icon: const Icon(Icons.delete),
+              onPressed: () {},
             ),
           ],
         ),
