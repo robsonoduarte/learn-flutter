@@ -10,7 +10,6 @@ class ProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productList = context.read<ProductList>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Gerenciar Produtos'),
@@ -29,10 +28,10 @@ class ProductsPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: ListView.builder(
-          itemCount: productList.itemsCount,
+          itemCount: context.watch<ProductList>().itemsCount,
           itemBuilder: (context, index) => Column(
             children: [
-              ProductItem(product: productList.items[index]),
+              ProductItem(product: context.watch<ProductList>().items[index]),
               const Divider(),
             ],
           ),
