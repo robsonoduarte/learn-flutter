@@ -1,10 +1,14 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
 import 'package:shop/data/dummy_data.dart';
 import 'package:shop/models/product.dart';
 
 class ProductList with ChangeNotifier {
+  final _url = 'https://shop-58107-default-rtdb.firebaseio.com';
+
   final List<Product> _items = dummyProducts;
 
   int get itemsCount => _items.length;
@@ -46,7 +50,22 @@ class ProductList with ChangeNotifier {
     }
   }
 
-  void _save(Product product) {
+  void _save(Product product) async {
+    var response = await http.post(
+      Uri.parse("$_url/products.json"),
+      body: jsonEncode(
+        {
+          "name": product.name,
+          "description": product.description,
+          "price": product.price,
+          "imageUrl": product.imageUrl,
+          "isFavorite": product.isFavorite
+        },
+      ),
+    );
+
+    print(response.statusCode);
+
     _items.add(product);
     notifyListeners();
   }
