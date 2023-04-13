@@ -7,7 +7,7 @@ import 'package:shop/data/dummy_data.dart';
 import 'package:shop/models/product.dart';
 
 class ProductList with ChangeNotifier {
-  final _url = 'https://shop-58107-default-rtdb.firebaseio.com';
+  final _url = 'https://shop-71f09-default-rtdb.firebaseio.com/';
 
   final List<Product> _items = dummyProducts;
 
@@ -16,9 +16,8 @@ class ProductList with ChangeNotifier {
   List<Product> get itemsFavorites =>
       _items.where((element) => element.isFavorite).toList();
 
-  void save(Map<String, Object> data) {
+  Future<void> save(Map<String, Object> data) async {
     bool hasId = data['id'] != null;
-
     final product = Product(
       id: hasId ? data['id'] as String : Random().nextDouble().toString(),
       name: data['name'] as String,
@@ -26,20 +25,20 @@ class ProductList with ChangeNotifier {
       price: data['price'] as double,
       imageUrl: data['imageUrl'] as String,
     );
-
     if (hasId) {
-      _update(product);
+      await _update(product);
     } else {
-      _save(product);
+      await _save(product);
     }
   }
 
-  void _update(Product product) {
+  Future<void> _update(Product product) {
     int index = _items.indexWhere((element) => element.id == product.id);
     if (index >= 0) {
       _items[index] = product;
       notifyListeners();
     }
+    return Future.value();
   }
 
   void remove(Product product) {
@@ -50,7 +49,7 @@ class ProductList with ChangeNotifier {
     }
   }
 
-  void _save(Product product) async {
+  Future<void> _save(Product product) async {
     var response = await http.post(
       Uri.parse("$_url/products.json"),
       body: jsonEncode(
@@ -63,10 +62,15 @@ class ProductList with ChangeNotifier {
         },
       ),
     );
-
-    print(response.statusCode);
-
-    _items.add(product);
+    _items.add(
+      Product(
+        id: jsonDecode(response.body)['name'],
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl,
+      ),
+    );
     notifyListeners();
   }
 }
