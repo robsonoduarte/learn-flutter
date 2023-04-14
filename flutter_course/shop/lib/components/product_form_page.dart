@@ -66,7 +66,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
     return isValidUrl && endWithFile;
   }
 
-  void _submit() {
+  void _submit() async {
     var isValid = _formKey.currentState?.validate() ?? false;
     if (!isValid) {
       return;
@@ -75,12 +75,28 @@ class _ProductFormPageState extends State<ProductFormPage> {
     setState(() {
       _isLoding = true;
     });
-    context.read<ProductList>().save(_formData).then((_) {
+    try {
+      await context.read<ProductList>().save(_formData);
+    } catch (err) {
+      await showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("Ocorreu um erro !"),
+          content: const Text('Merda sempre acontece !!! '),
+          actions: [
+            TextButton(
+              child: const Text("OK"),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        ),
+      );
+    } finally {
       setState(() {
         _isLoding = false;
       });
       Navigator.of(context).pop();
-    });
+    }
   }
 
   @override
