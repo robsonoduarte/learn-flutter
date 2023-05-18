@@ -3,10 +3,11 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:shop/exceptions/http_exception.dart';
 import 'package:shop/models/product.dart';
 
 class ProductList with ChangeNotifier {
-  final _url = 'https://shop-71f09-default-rtdb.firebaseio.com/products.json';
+  final _baseUrl = 'https://shop-71f09-default-rtdb.firebaseio.com/products';
 
   final List<Product> _items = [];
 
@@ -17,7 +18,7 @@ class ProductList with ChangeNotifier {
 
   Future<void> loadProducts() async {
     _items.clear();
-    final response = await http.get(Uri.parse(_url));
+    final response = await http.get(Uri.parse('$_baseUrl.json'));
     if (response.body == 'null') return;
     Map<String, dynamic> data = jsonDecode(response.body);
     data.forEach((id, product) {
@@ -51,26 +52,48 @@ class ProductList with ChangeNotifier {
     }
   }
 
-  Future<void> _update(Product product) {
+  Future<void> _update(Product product) async {
     int index = _items.indexWhere((element) => element.id == product.id);
     if (index >= 0) {
+      await http.post(
+        Uri.parse('$_baseUrl/${product.id}.json'),
+        body: jsonEncode(
+          {
+            "name": product.name,
+            "description": product.description,
+            "price": product.price,
+            "imageUrl": product.imageUrl,
+            "isFavorite": product.isFavorite
+          },
+        ),
+      );
       _items[index] = product;
       notifyListeners();
     }
-    return Future.value();
   }
 
-  void remove(Product product) {
+  Future<void> remove(Product product) async {
     int index = _items.indexWhere((element) => element.id == product.id);
     if (index >= 0) {
-      _items.removeWhere((element) => element.id == product.id);
+      _items.removeAt(index);
       notifyListeners();
+      final response = await http.delete(
+        Uri.parse('$_baseUrl/${product.id}.json'),
+      );
+      if (response.statusCode != 200) {
+        _items.insert(index, product);
+        notifyListeners();
+        throw HttpException(
+          'Error when delete product',
+          response.statusCode,
+        );
+      }
     }
   }
 
   _save(Product product) async {
     final response = await http.post(
-      Uri.parse(_url),
+      Uri.parse('$_baseUrl.json'),
       body: jsonEncode(
         {
           "name": product.name,

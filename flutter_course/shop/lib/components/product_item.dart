@@ -52,9 +52,18 @@ class ProductItem extends StatelessWidget {
                       )
                     ],
                   ),
-                ).then((value) {
+                ).then((value) async {
                   if (value ?? false) {
-                    context.read<ProductList>().remove(product);
+                    try {
+                      await context.read<ProductList>().remove(product);
+                    } catch (error) {
+                      print(error.toString());
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(
+                          error.toString(),
+                        ),
+                      ));
+                    }
                   }
                 });
               },
