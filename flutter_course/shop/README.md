@@ -6,6 +6,7 @@ the concepts are:
 
 * [Providers]()
 * [Form]()
+* [HTTP]()
 
 ### Providers
  * Inherited
@@ -21,6 +22,13 @@ the concepts are:
  * Validation
  * Save
  * Submit
+### HTTP
+ * Firebase
+ * FutureBuiler 
+ * POST
+ * GET
+ * PATCH
+ * DELETE
 
 ## to run app
 ```shell
