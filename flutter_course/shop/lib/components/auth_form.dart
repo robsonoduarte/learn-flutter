@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/models/auth.dart';
 
 enum AuthMode {
   signup,
@@ -13,12 +15,19 @@ class AuthForm extends StatefulWidget {
 
 class _AuthFormState extends State<AuthForm> {
   final _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  bool _isLoading = false;
+
   AuthMode _authMode = AuthMode.login;
 
-  Map<String, String> _authData = {
+  final Map<String, String> _authData = {
     'email': '',
     'password': ',',
   };
+
+  _isLogin() => _authMode == AuthMode.login;
+  _isSignup() => _authMode == AuthMode.signup;
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +38,16 @@ class _AuthFormState extends State<AuthForm> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Container(
-        height: 320,
+        height: _isLogin() ? 310 : 400,
         width: screenSize.width * 0.75,
         padding: const EdgeInsets.all(16),
         child: Form(
+          key: _formKey,
           child: Column(
             children: [
               TextFormField(
                 decoration: const InputDecoration(
-                  labelText: 'E-mail',
+                  labelText: 'Email',
                 ),
                 keyboardType: TextInputType.emailAddress,
                 onSaved: (value) {
@@ -45,8 +55,8 @@ class _AuthFormState extends State<AuthForm> {
                 },
                 validator: (value) {
                   final email = value ?? '';
-                  if (email.trim().isEmpty || email.contains('@')) {
-                    return 'informe um email valido';
+                  if (email.trim().isEmpty || !email.contains('@')) {
+                    return 'invalid email';
                   }
                   return null;
                 },
@@ -54,34 +64,34 @@ class _AuthFormState extends State<AuthForm> {
               TextFormField(
                 controller: _passwordController,
                 decoration: const InputDecoration(
-                  labelText: 'Senha',
+                  labelText: 'Password',
                 ),
                 keyboardType: TextInputType.emailAddress,
                 obscureText: true,
                 onSaved: (value) {
-                  _authData['senha'] = value ?? '';
+                  _authData['password'] = value ?? '';
                 },
                 validator: (value) {
-                  final _password = value ?? '';
-                  if (_password.trim().isEmpty || _password.length < 5) {
-                    return 'Informe uma senha valida';
+                  final password = value ?? '';
+                  if (password.trim().isEmpty || password.length < 5) {
+                    return 'invalid password';
                   }
                   return null;
                 },
               ),
-              if (_authMode == AuthMode.signup)
+              if (_isSignup())
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'Confimar Senah',
+                    labelText: 'confirm password',
                   ),
                   keyboardType: TextInputType.emailAddress,
                   obscureText: true,
-                  validator: _authMode == AuthMode.login
+                  validator: _isLogin()
                       ? null
                       : (value) {
                           final password = value ?? '';
                           if (password != _passwordController.text) {
-                            return 'senhas não conferem';
+                            return 'password does no match';
                           }
                           return null;
                         },
@@ -89,18 +99,27 @@ class _AuthFormState extends State<AuthForm> {
               const SizedBox(
                 height: 10,
               ),
-              ElevatedButton(
-                onPressed: _submit,
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+              _isLoading
+                  ? const CircularProgressIndicator()
+                  : ElevatedButton(
+                      onPressed: _submit,
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 30,
+                            vertical: 8,
+                          )),
+                      child: Text(
+                        _authMode == AuthMode.login ? 'Login' : "Register",
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 30,
-                      vertical: 8,
-                    )),
+              const Spacer(),
+              TextButton(
+                onPressed: _switchAuthMode,
                 child: Text(
-                  _authMode == AuthMode.login ? 'Entrar' : "Registrar",
+                  _isLogin() ? 'Wish register ?' : 'Already have an account ?',
                 ),
               )
             ],
@@ -110,5 +129,32 @@ class _AuthFormState extends State<AuthForm> {
     );
   }
 
-  void _submit() {}
+  void _submit() async {
+    final isValid = _formKey.currentState?.validate() ?? false;
+    if (!isValid) {
+      return;
+    }
+    setState(() => _isLoading = true);
+    _formKey.currentState?.save();
+    final auth = context.read<Auth>();
+
+    if (_isLogin()) {
+    } else {
+      await auth.signup(
+        _authData['email']!,
+        _authData['password']!,
+      );
+    }
+    setState(() => _isLoading = false);
+  }
+
+  void _switchAuthMode() {
+    setState(() {
+      if (_isLogin()) {
+        _authMode = AuthMode.signup;
+      } else {
+        _authMode = AuthMode.login;
+      }
+    });
+  }
 }
