@@ -139,6 +139,10 @@ class _AuthFormState extends State<AuthForm> {
     final auth = context.read<Auth>();
 
     if (_isLogin()) {
+      await auth.login(
+        _authData['email']!,
+        _authData['password']!,
+      );
     } else {
       await auth.signup(
         _authData['email']!,
