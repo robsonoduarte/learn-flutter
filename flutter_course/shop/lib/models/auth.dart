@@ -2,14 +2,36 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:shop/exceptions/auth_exception.dart';
 
 class Auth with ChangeNotifier {
+  String? _token;
+  String? _email;
+  String? _uid;
+  DateTime? _expiryToken;
+
+  bool get isAuth {
+    return _token != null && (_expiryToken?.isAfter(DateTime.now()) ?? false);
+  }
+
+  String? get token {
+    return isAuth ? _token : null;
+  }
+
+  String? get email {
+    return isAuth ? _email : null;
+  }
+
+  String? get uid {
+    return isAuth ? _uid : null;
+  }
+
   Future<void> signup(String email, String password) async {
-    await _authenticate(email, password, 'signUp');
+    return _authenticate(email, password, 'signUp');
   }
 
   Future<void> login(String email, String password) async {
-    await _authenticate(email, password, 'signInWithPassword');
+    return _authenticate(email, password, 'signInWithPassword');
   }
 
   Future<void> _authenticate(
@@ -26,7 +48,20 @@ class Auth with ChangeNotifier {
         },
       ),
     );
-    print(response.statusCode);
-    print(response.body);
+
+    final body = jsonDecode(response.body);
+    if (response.statusCode != 200) {
+      throw AuthException(body['error']['message']);
+    } else {
+      _token = body['idToken'];
+      _email = body['email'];
+      _uid = body['localId'];
+      _expiryToken = DateTime.now().add(
+        Duration(
+          seconds: int.parse(body['expiresIn']),
+        ),
+      );
+      notifyListeners();
+    }
   }
 }

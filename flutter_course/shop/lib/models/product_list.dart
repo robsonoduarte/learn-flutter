@@ -8,7 +8,10 @@ import 'package:shop/models/product.dart';
 import 'package:shop/utils/constants.dart';
 
 class ProductList with ChangeNotifier {
-  final List<Product> _items = [];
+  String _token;
+  List<Product> _items = [];
+
+  ProductList(this._token, this._items);
 
   int get itemsCount => _items.length;
   List<Product> get items => [..._items];
@@ -17,8 +20,8 @@ class ProductList with ChangeNotifier {
 
   Future<void> loadProducts() async {
     _items.clear();
-    final response =
-        await http.get(Uri.parse('${Constants.productBaseUrl}.json'));
+    final response = await http
+        .get(Uri.parse('${Constants.productBaseUrl}.json?auth=$_token'));
     if (response.body == 'null') return;
     Map<String, dynamic> data = jsonDecode(response.body);
     data.forEach((id, product) {
