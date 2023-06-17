@@ -26,11 +26,20 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => Auth()),
         ChangeNotifierProvider(create: (_) => Cart()),
-        ChangeNotifierProvider(create: (_) => OrderList()),
+        ChangeNotifierProxyProvider<Auth, OrderList>(
+          create: (_) => OrderList(),
+          update: (context, auth, previous) => OrderList(
+            auth.token ?? '',
+            previous!.items ?? [],
+          ),
+        ),
         ChangeNotifierProxyProvider<Auth, ProductList>(
-          create: (_) => ProductList('', []),
-          update: (context, auth, previous) =>
-              ProductList(auth.token ?? '', previous!.items ?? []),
+          create: (_) => ProductList(),
+          update: (context, auth, previous) => ProductList(
+            auth.token ?? '',
+            auth.userId ?? '',
+            previous!.items ?? [],
+          ),
         ),
       ],
       child: MaterialApp(

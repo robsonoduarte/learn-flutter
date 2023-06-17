@@ -7,7 +7,7 @@ import 'package:shop/exceptions/auth_exception.dart';
 class Auth with ChangeNotifier {
   String? _token;
   String? _email;
-  String? _uid;
+  String? _userId;
   DateTime? _expiryToken;
 
   bool get isAuth {
@@ -22,8 +22,8 @@ class Auth with ChangeNotifier {
     return isAuth ? _email : null;
   }
 
-  String? get uid {
-    return isAuth ? _uid : null;
+  String? get userId {
+    return isAuth ? _userId : null;
   }
 
   Future<void> signup(String email, String password) async {
@@ -37,7 +37,7 @@ class Auth with ChangeNotifier {
   Future<void> _authenticate(
       String email, String password, String urlAction) async {
     final uri =
-        "https://identitytoolkit.googleapis.com/v1/accounts:$urlAction?key=AIzaSyCiyL7bHcgUvhMEl9PormwNU43tlGhiLSk";
+        "https://identitytoolkit.googleapis.com/v1/accounts:$urlAction?key=FIRE_BASE_API_KEY";
     final response = await http.post(
       Uri.parse(uri),
       body: jsonEncode(
@@ -55,7 +55,7 @@ class Auth with ChangeNotifier {
     } else {
       _token = body['idToken'];
       _email = body['email'];
-      _uid = body['localId'];
+      _userId = body['localId'];
       _expiryToken = DateTime.now().add(
         Duration(
           seconds: int.parse(body['expiresIn']),
