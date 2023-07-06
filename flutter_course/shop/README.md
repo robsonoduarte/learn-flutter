@@ -4,10 +4,6 @@ In this app we studied many concepts about flutter:
 
 the concepts are:
 
-* [Providers]()
-* [Form]()
-* [HTTP]()
-
 ### Providers
  * Inherited
  * Mixins
@@ -30,7 +26,22 @@ the concepts are:
  * PATCH
  * DELETE
 ### Anitation
-...
+ * SingleTickerProviderStateMixin
+ * AnimationController
+ * AnimatedContainer
+ * Tween
+ * Hero
+ * CurvedAnimation
+ * FadeTransition
+ * SlideTransition
+ * FadeInImage
+ * PageTransitionsTheme
+ * SingleChildScrollView
+ * CustomScrollView
+ * SliverAppBar
+ * FlexibleSpaceBar
+ * SliverList
+ * SliverChildListDelegate  
 
 ## to run app
 ```shell
