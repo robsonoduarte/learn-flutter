@@ -18,7 +18,12 @@ class _PlaceFormScreenState extends State<PlaceFormScreen> {
     _pickedImage = file;
   }
 
-  _submit() {}
+  _submit() {
+    if (_titleController.text.isEmpty || _pickedImage == null) {
+      return;
+    }
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
