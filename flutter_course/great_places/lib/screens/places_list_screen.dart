@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:great_places/provider/grate_places.dart';
 import 'package:great_places/utlis/app_routes.dart';
+import 'package:provider/provider.dart';
 
 class PlacesListScreen extends StatelessWidget {
   const PlacesListScreen({super.key});
@@ -18,8 +20,28 @@ class PlacesListScreen extends StatelessWidget {
           )
         ],
       ),
-      body: const Center(
-        child: CircularProgressIndicator(),
+      body: Consumer<GreatPlaces>(
+        child: const Center(
+          child: Text('No Great Places'),
+        ),
+        builder: (context, greatPlaces, child) {
+          Widget? widget = greatPlaces.total == 0
+              ? child
+              : ListView.builder(
+                  itemCount: greatPlaces.total,
+                  itemBuilder: (context, index) {
+                    final place = greatPlaces.getByIndex(index);
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: FileImage(place.image),
+                      ),
+                      title: Text(place.title),
+                      onTap: () {},
+                    );
+                  },
+                );
+          return widget!;
+        },
       ),
     );
   }
