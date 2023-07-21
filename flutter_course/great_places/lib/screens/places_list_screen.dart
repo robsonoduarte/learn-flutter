@@ -20,28 +20,36 @@ class PlacesListScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Consumer<GreatPlaces>(
-        child: const Center(
-          child: Text('No Great Places'),
-        ),
-        builder: (context, greatPlaces, child) {
-          Widget? widget = greatPlaces.total == 0
-              ? child
-              : ListView.builder(
-                  itemCount: greatPlaces.total,
-                  itemBuilder: (context, index) {
-                    final place = greatPlaces.getByIndex(index);
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: FileImage(place.image),
-                      ),
-                      title: Text(place.title),
-                      onTap: () {},
-                    );
-                  },
-                );
-          return widget!;
-        },
+      body: FutureBuilder(
+        future: context.read<GreatPlaces>().loadPlaces(),
+        builder: (context, snapshot) =>
+            snapshot.connectionState == ConnectionState.waiting
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Consumer<GreatPlaces>(
+                    child: const Center(
+                      child: Text('No Great Places'),
+                    ),
+                    builder: (context, greatPlaces, child) {
+                      Widget? widget = greatPlaces.total == 0
+                          ? child
+                          : ListView.builder(
+                              itemCount: greatPlaces.total,
+                              itemBuilder: (context, index) {
+                                final place = greatPlaces.getByIndex(index);
+                                return ListTile(
+                                  leading: CircleAvatar(
+                                    backgroundImage: FileImage(place.image),
+                                  ),
+                                  title: Text(place.title),
+                                  onTap: () {},
+                                );
+                              },
+                            );
+                      return widget!;
+                    },
+                  ),
       ),
     );
   }
