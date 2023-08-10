@@ -23,6 +23,21 @@ class _MapScreenState extends State<MapScreen> {
   final _makers = <Marker>{};
 
   @override
+  void initState() {
+    super.initState();
+
+    _makers.add(
+      Marker(
+        markerId: const MarkerId('p1'),
+        position: LatLng(
+          widget.initialLocation.latitude,
+          widget.initialLocation.longitude,
+        ),
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
