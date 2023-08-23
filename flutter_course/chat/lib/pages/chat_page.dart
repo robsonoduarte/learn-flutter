@@ -22,7 +22,7 @@ class ChatPage extends StatelessWidget {
                 value: 'logout',
                 child: Container(
                   child: Row(
-                    children: const [
+                    children: [
                       Icon(
                         Icons.exit_to_app,
                         color: Colors.black87,
