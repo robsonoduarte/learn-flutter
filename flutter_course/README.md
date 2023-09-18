@@ -4,7 +4,7 @@
 
 * [Dart Quick Summary](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/dart_quick_summary)
 * [Flexible and Expanded Widgets](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/flexible_expanded)
-* [Example App](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/example)
+* [Bascic Example App](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/example)
 * [Quiz App](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/quiz_app)
 * [Meal App](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/meals)
 * [Shop App](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/shop)
