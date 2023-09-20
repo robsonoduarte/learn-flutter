@@ -1,16 +1,7 @@
 # run_native
 
-A new Flutter project.
+in this app we explored how run native code with flutter:
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* [Invoke the code in flutter](https://github.com/robsonoduarte/learn-flutter/blob/0769a11b67f98857664238b4173c3cd55775f96d/flutter_course/run_native/lib/main.dart#L93-L95)
+* [Channel in kotlin](https://github.com/robsonoduarte/learn-flutter/blob/0769a11b67f98857664238b4173c3cd55775f96d/flutter_course/run_native/android/app/src/main/kotlin/com/example/run_native/MainActivity.kt#L8-L21)
+* [Channel in Swift](https://github.com/robsonoduarte/learn-flutter/blob/0769a11b67f98857664238b4173c3cd55775f96d/flutter_course/run_native/ios/Runner/AppDelegate.swift#L10-L25)
