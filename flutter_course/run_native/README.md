@@ -1,4 +1,4 @@
-# run_native
+# run native code
 
 in this app we explored how run native code with flutter:
 
