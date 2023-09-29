@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ResultWidget extends StatelessWidget implements PreferredSizeWidget {
-  final bool won;
+  final bool? won;
   final void Function() onRestart;
 
   const ResultWidget({
@@ -39,13 +39,13 @@ class ResultWidget extends StatelessWidget implements PreferredSizeWidget {
 
   _getColor() {
     if (won == null) return Colors.yellow;
-    if (won) return Colors.green[300];
+    if (won!) return Colors.green[300];
     return Colors.red[300];
   }
 
   _getIcon() {
     if (won == null) return Icons.sentiment_satisfied;
-    if (won) return Icons.sentiment_very_satisfied;
+    if (won!) return Icons.sentiment_very_satisfied;
     return Icons.sentiment_very_dissatisfied;
   }
 }

@@ -1,53 +1,92 @@
 import 'package:flutter/material.dart';
-import 'package:minefield/components/field_widget.dart';
+import 'package:minefield/components/board_widget.dart';
 import 'package:minefield/components/result_widget.dart';
+import 'package:minefield/models/board.dart';
 import 'package:minefield/models/explosion_exception.dart';
 import 'package:minefield/models/field.dart';
 
-class MineFieldApp extends StatelessWidget {
+class MineFieldApp extends StatefulWidget {
   const MineFieldApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    Field n1 = Field(1, 0);
-    n1.undermined();
-    Field n2 = Field(1, 0);
-    n2.undermined();
-    Field field = Field(0, 0);
-    field.addNeighborhood(n1);
-    field.addNeighborhood(n2);
-    try {
-      //field.undermined();
-      //field.open();
-      field.toggleMarking();
-    } on ExplosionException {}
+  State<MineFieldApp> createState() => _MineFieldAppState();
+}
 
+class _MineFieldAppState extends State<MineFieldApp> {
+  bool? _won;
+  Board? _board;
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: ResultWidget(
-          won: true,
+          won: _won,
           onRestart: _restart,
         ),
         body: Container(
-          child: FieldWidget(
-            field: field,
-            onOpen: _open,
-            onToggleMarking: _toggleMarking,
+          color: Colors.grey,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return BoardWidget(
+                board: _getBoard(
+                  constraints.maxWidth,
+                  constraints.maxHeight,
+                ),
+                onOpen: _open,
+                onToggleMarking: _toggleMarking,
+              );
+            },
           ),
         ),
       ),
     );
   }
 
+  Board _getBoard(double width, double height) {
+    if (_board == null) {
+      int columns = 15;
+      double fieldSize = width / columns;
+      int lines = (height / fieldSize).floor();
+      _board = Board(
+        lines,
+        columns,
+        50,
+      );
+    }
+    return _board!;
+  }
+
   _restart() {
-    print('restaring');
+    setState(() {
+      _won = null;
+      _board!.restart();
+    });
   }
 
   _open(Field field) {
-    print("open");
+    setState(() {
+      if (_won != null) {
+        return;
+      }
+      try {
+        field.open();
+        if (_board!.resolved) {
+          _won = true;
+        }
+      } on ExplosionException {
+        _won = false;
+        _board!.revelBombs();
+      }
+    });
   }
 
   _toggleMarking(Field field) {
-    print("toggle");
+    if (_won != null) {
+      return;
+    }
+    setState(() {
+      field.toggleMarking();
+    });
   }
 }
