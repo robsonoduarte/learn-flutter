@@ -1,16 +1,19 @@
-# minefield
+# minefield app
+![image](https://github.com/robsonoduarte/learn-flutter/assets/797845/e7cad160-2363-4abc-939b-aa7ee53d9c15)
 
-A new Flutter project.
 
-## Getting Started
+in this app we explored the concepts about:
 
-This project is a starting point for a Flutter application.
+* [LayoutBuilder](https://github.com/robsonoduarte/learn-flutter/blob/ff00ada16a114e237b583ab90edb94818410bb41/flutter_course/minefield/lib/screens/mine_field_app.dart#L29-L30)
+* [GridView](https://github.com/robsonoduarte/learn-flutter/blob/ff00ada16a114e237b583ab90edb94818410bb41/flutter_course/minefield/lib/components/board_widget.dart#L20-L21)
+* [PreferredSizeWidget](https://github.com/robsonoduarte/learn-flutter/blob/ff00ada16a114e237b583ab90edb94818410bb41/flutter_course/minefield/lib/components/result_widget.dart#L3)
+* [PreferredSizeWidget as appBar](https://github.com/robsonoduarte/learn-flutter/blob/ff00ada16a114e237b583ab90edb94818410bb41/flutter_course/minefield/lib/screens/mine_field_app.dart#L23)
+* [InkWell](https://github.com/robsonoduarte/learn-flutter/blob/ff00ada16a114e237b583ab90edb94818410bb41/flutter_course/minefield/lib/components/field_widget.dart#L18)
+* [Function as param](https://github.com/robsonoduarte/learn-flutter/blob/ff00ada16a114e237b583ab90edb94818410bb41/flutter_course/minefield/lib/components/field_widget.dart#L12-L13)
+* [Exception](https://github.com/robsonoduarte/learn-flutter/blob/ff00ada16a114e237b583ab90edb94818410bb41/flutter_course/minefield/lib/models/explosion_exception.dart#L1)
+* [Tests](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/minefield/test/model)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## to run
+```shell
+flutter run
+```
