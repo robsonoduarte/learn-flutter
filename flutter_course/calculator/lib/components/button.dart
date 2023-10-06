@@ -11,32 +11,34 @@ class Button extends StatelessWidget {
   final void Function(String) cb;
 
   Button({
-    @required this.text,
+    required this.text,
     this.big = false,
     this.color = DEFAULT,
-    @required this.cb,
+    required this.cb,
   });
 
   Button.big({
-    @required this.text,
+    required this.text,
     this.big = true,
     this.color = DEFAULT,
-    @required this.cb,
+    required this.cb,
   });
 
   Button.operation({
-    @required this.text,
+    required this.text,
     this.big = false,
     this.color = OPERATION,
-    @required this.cb,
+    required this.cb,
   });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: big ? 2 : 1,
-      child: RaisedButton(
-        color: this.color,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: this.color,
+        ),
         child: Text(
           text,
           style: TextStyle(
