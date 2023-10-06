@@ -1,4 +1,4 @@
-package br.com.ontracker.calculator
+package bravox.dev.calculator
 
 import io.flutter.embedding.android.FlutterActivity
 
