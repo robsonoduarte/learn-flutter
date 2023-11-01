@@ -4,6 +4,8 @@ part 'pomodoro.store.g.dart';
 
 class PomodoroStore = _PomodoroStore with _$PomodoroStore;
 
+enum RangeType { work, rest }
+
 abstract class _PomodoroStore with Store {
   @observable
   bool started = false;
@@ -15,6 +17,8 @@ abstract class _PomodoroStore with Store {
   int workTime = 2;
   @observable
   int restTime = 1;
+  @observable
+  RangeType rangeType = RangeType.rest;
 
   @action
   void start() {
@@ -49,5 +53,13 @@ abstract class _PomodoroStore with Store {
   @action
   void decRestTime() {
     restTime--;
+  }
+
+  bool isWork() {
+    return rangeType == RangeType.work;
+  }
+
+  bool isRest() {
+    return rangeType == RangeType.rest;
   }
 }

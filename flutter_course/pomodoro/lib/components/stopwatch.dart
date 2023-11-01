@@ -10,13 +10,16 @@ class StopWatch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red,
+      color:
+          context.watch<PomodoroStore>().isWork() ? Colors.red : Colors.green,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'Time to work',
-            style: TextStyle(
+          Text(
+            context.watch<PomodoroStore>().isWork()
+                ? 'Time to work'
+                : 'Time to Rest',
+            style: const TextStyle(
               fontSize: 40,
               color: Colors.white,
             ),

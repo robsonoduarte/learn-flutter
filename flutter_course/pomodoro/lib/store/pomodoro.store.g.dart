@@ -89,6 +89,22 @@ mixin _$PomodoroStore on _PomodoroStore, Store {
     });
   }
 
+  late final _$rangeTypeAtom =
+      Atom(name: '_PomodoroStore.rangeType', context: context);
+
+  @override
+  RangeType get rangeType {
+    _$rangeTypeAtom.reportRead();
+    return super.rangeType;
+  }
+
+  @override
+  set rangeType(RangeType value) {
+    _$rangeTypeAtom.reportWrite(value, super.rangeType, () {
+      super.rangeType = value;
+    });
+  }
+
   late final _$_PomodoroStoreActionController =
       ActionController(name: '_PomodoroStore', context: context);
 
@@ -176,7 +192,8 @@ started: ${started},
 minutes: ${minutes},
 seconds: ${seconds},
 workTime: ${workTime},
-restTime: ${restTime}
+restTime: ${restTime},
+rangeType: ${rangeType}
     ''';
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoro/store/pomodoro.store.dart';
+import 'package:provider/provider.dart';
 
 class InputTime extends StatelessWidget {
   final String title;
@@ -32,7 +34,9 @@ class InputTime extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(15),
-                primary: Colors.red,
+                primary: context.watch<PomodoroStore>().isWork()
+                    ? Colors.red
+                    : Colors.green,
               ),
               onPressed: dec,
               child: const Icon(
@@ -50,7 +54,9 @@ class InputTime extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(15),
-                primary: Colors.red,
+                primary: context.watch<PomodoroStore>().isWork()
+                    ? Colors.red
+                    : Colors.green,
               ),
               onPressed: inc,
               child: const Icon(

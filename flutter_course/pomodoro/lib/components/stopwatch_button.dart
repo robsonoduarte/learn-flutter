@@ -10,6 +10,7 @@ class StopWatchButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      onPressed: click,
       child: Row(
         children: [
           Icon(
@@ -18,7 +19,6 @@ class StopWatchButton extends StatelessWidget {
           Text(text)
         ],
       ),
-      onPressed: click,
     );
   }
 }
