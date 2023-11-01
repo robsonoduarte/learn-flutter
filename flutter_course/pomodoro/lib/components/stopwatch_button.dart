@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 class StopWatchButton extends StatelessWidget {
   final String text;
   final IconData icon;
-  const StopWatchButton({
-    super.key,
-    required this.text,
-    required this.icon,
-  });
+  final void Function()? click;
+  const StopWatchButton(
+      {super.key, required this.text, required this.icon, this.click});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,7 @@ class StopWatchButton extends StatelessWidget {
           Text(text)
         ],
       ),
-      onPressed: () {},
+      onPressed: click,
     );
   }
 }

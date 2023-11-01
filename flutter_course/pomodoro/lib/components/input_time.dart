@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 class InputTime extends StatelessWidget {
   final String title;
   final int value;
+  final void Function()? inc;
+  final void Function()? dec;
 
-  const InputTime({
-    super.key,
-    required this.title,
-    required this.value,
-  });
+  const InputTime(
+      {super.key,
+      required this.title,
+      required this.value,
+      this.inc,
+      this.dec});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class InputTime extends StatelessWidget {
                 padding: const EdgeInsets.all(15),
                 primary: Colors.red,
               ),
-              onPressed: () {},
+              onPressed: dec,
               child: const Icon(
                 Icons.arrow_downward,
                 color: Colors.white,
@@ -49,7 +52,7 @@ class InputTime extends StatelessWidget {
                 padding: const EdgeInsets.all(15),
                 primary: Colors.red,
               ),
-              onPressed: () {},
+              onPressed: inc,
               child: const Icon(
                 Icons.arrow_upward,
                 color: Colors.white,
