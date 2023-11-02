@@ -1,29 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pomodoro/components/input_time.dart';
 import 'package:pomodoro/components/stopwatch.dart';
+import 'package:pomodoro/store/pomodoro.store.dart';
+import 'package:provider/provider.dart';
 
 class Pomodoro extends StatelessWidget {
   const Pomodoro({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(
+          const Expanded(
             child: StopWatch(),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: 40,
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                InputTime(title: 'Work', value: 25),
-                InputTime(title: 'Rest', value: 5),
-              ],
+            child: Observer(
+              builder: (context) => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  InputTime(
+                    title: 'Work',
+                    value: context.read<PomodoroStore>().workTime,
+                    inc: context.read<PomodoroStore>().incWorkTime,
+                    dec: context.read<PomodoroStore>().decWorkTime,
+                  ),
+                  InputTime(
+                    title: 'Rest',
+                    value: context.read<PomodoroStore>().restTime,
+                    inc: context.read<PomodoroStore>().incRestTime,
+                    dec: context.read<PomodoroStore>().decRestTime,
+                  ),
+                ],
+              ),
             ),
           )
         ],
