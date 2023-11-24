@@ -9,32 +9,32 @@ class StopWatch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color:
-          context.watch<PomodoroStore>().isWork() ? Colors.red : Colors.green,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            context.watch<PomodoroStore>().isWork()
-                ? 'Time to work'
-                : 'Time to Rest',
-            style: const TextStyle(
-              fontSize: 40,
-              color: Colors.white,
+    return Observer(
+      builder: (context) => Container(
+        color:
+            context.watch<PomodoroStore>().isWork() ? Colors.red : Colors.green,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              context.watch<PomodoroStore>().isWork()
+                  ? 'Time to work'
+                  : 'Time to Rest',
+              style: const TextStyle(
+                fontSize: 40,
+                color: Colors.white,
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            '${context.watch<PomodoroStore>().minutes.toString().padLeft(2, '0')}:${context.watch<PomodoroStore>().seconds.toString().padLeft(2, '0')}',
-            style: const TextStyle(
-              fontSize: 120,
-              color: Colors.white,
+            const SizedBox(height: 20),
+            Text(
+              '${context.watch<PomodoroStore>().minutes.toString().padLeft(2, '0')}:${context.watch<PomodoroStore>().seconds.toString().padLeft(2, '0')}',
+              style: const TextStyle(
+                fontSize: 120,
+                color: Colors.white,
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Observer(
-            builder: (context) => Row(
+            const SizedBox(height: 20),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (!context.watch<PomodoroStore>().started)
@@ -64,9 +64,9 @@ class StopWatch extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
