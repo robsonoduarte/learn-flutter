@@ -13,6 +13,7 @@
 * [Run Native Code](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/run_native)
 * [Minefield app](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/minefield)
 * [Calculator app](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/calculator)
+* [Pomodoro app](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/pomodoro)
 
 
 
