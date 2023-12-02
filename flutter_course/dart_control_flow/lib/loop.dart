@@ -1,3 +1,5 @@
+import 'dart:io';
+
 main() {
   // Loops
   // https://dart.dev/language/loops
@@ -39,6 +41,15 @@ main() {
   // for each
   var collection = [1, 2, 3];
   collection.forEach(print);
+
+  // while
+  // https://dart.dev/language/loops#while-and-do-while
+
+  var exit = false;
+  while (!exit) {
+    stdout.write("to exit type exit");
+    exit = stdin.readLineSync()?.trim() == 'exit';
+  }
 }
 
 class Person {
