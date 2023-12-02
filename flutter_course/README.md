@@ -16,6 +16,7 @@
 * [Pomodoro app](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/pomodoro)
 * [Dart Fundamentals](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/dart_fundamentals)
 * [Dart Control Flow](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/dart_control_flow)
+* [Dart Functions](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/dart_functions)
 
 
 
