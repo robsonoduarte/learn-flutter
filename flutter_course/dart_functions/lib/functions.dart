@@ -42,4 +42,21 @@ main() {
   // function as param
   var result = [1, 2, 3].fold(1, sum);
   print(result);
+
+  // return a function
+  partialSum(int a) {
+    return (int b) {
+      return a + b;
+    };
+  }
+
+  print(partialSum(10)(20));
+
+  // generics
+  E? elementAt<E>(List<E> list, int index) {
+    return list.length <= index ? null : list[index];
+  }
+
+  print(elementAt<int>([1, 3, 4], 4));
+  print(elementAt([1, 3, 4], 2));
 }
