@@ -1,0 +1,6 @@
+name: dart_classes_objects
+description: a dart classes and objects
+version: 1.0.0
+
+environment:
+  sdk: ^3.1.3
