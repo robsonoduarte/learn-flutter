@@ -17,6 +17,7 @@
 * [Dart Fundamentals](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/dart_fundamentals)
 * [Dart Control Flow](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/dart_control_flow)
 * [Dart Functions](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/dart_functions)
+* [Dart Classe & Objects](https://github.com/robsonoduarte/learn-flutter/tree/master/flutter_course/dart_classes_objects)  
 
 
 
