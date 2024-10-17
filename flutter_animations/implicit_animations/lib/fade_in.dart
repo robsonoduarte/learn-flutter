@@ -11,38 +11,41 @@ class FadeIn extends StatefulWidget {
 
 class _FadeInState extends State<FadeIn> {
   double opacity = 0;
-  bool show = false;
+  bool show = true;
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: <Widget>[
-      Image.network(owlUrl),
-      TextButton(
-        child: Text(
-          show ? 'Show Details' : 'Hide Details',
-          style: const TextStyle(color: Colors.blueAccent),
+    return Scaffold(
+      appBar: AppBar(title: const Text('FadeIn')),
+      body: ListView(children: <Widget>[
+        Image.network(owlUrl),
+        TextButton(
+          child: Text(
+            show ? 'Show Details' : 'Hide Details',
+            style: const TextStyle(color: Colors.blueAccent),
+          ),
+          onPressed: () => setState(() {
+            if (show) {
+              show = false;
+              opacity = 1;
+            } else {
+              show = true;
+              opacity = 0;
+            }
+          }),
         ),
-        onPressed: () => setState(() {
-          if (show) {
-            show = false;
-            opacity = 1;
-          } else {
-            show = true;
-            opacity = 0;
-          }
-        }),
-      ),
-      AnimatedOpacity(
-        duration: const Duration(seconds: 2),
-        opacity: opacity,
-        child: const Column(
-          children: [
-            Text('Type: Owl'),
-            Text('Age: 39'),
-            Text('Employment: None'),
-          ],
-        ),
-      )
-    ]);
+        AnimatedOpacity(
+          duration: const Duration(seconds: 2),
+          opacity: opacity,
+          child: const Column(
+            children: [
+              Text('Type: Owl'),
+              Text('Age: 39'),
+              Text('Employment: None'),
+            ],
+          ),
+        )
+      ]),
+    );
   }
 }
