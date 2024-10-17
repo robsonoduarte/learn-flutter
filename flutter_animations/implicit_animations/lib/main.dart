@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:implicit_animations/fade_in.dart';
+import 'package:implicit_animations/shape-shifting.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -28,6 +29,20 @@ class MyApp extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const FadeIn(),
+                  ),
+                );
+              },
+            ),
+            TextButton(
+              child: const Text(
+                'Shape Shifting',
+                style: TextStyle(fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ShapeShifting(),
                   ),
                 );
               },
