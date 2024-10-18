@@ -25,6 +25,9 @@ class _ShapeShiftingState extends State<ShapeShifting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Shape Shifting'),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +35,9 @@ class _ShapeShiftingState extends State<ShapeShifting> {
             SizedBox(
               width: 128,
               height: 128,
-              child: Container(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOutBack,
                 margin: EdgeInsets.all(margin),
                 decoration: BoxDecoration(
                   color: color,
@@ -42,12 +47,20 @@ class _ShapeShiftingState extends State<ShapeShifting> {
             ),
             ElevatedButton(
               child: const Text('Change'),
-              onPressed: () => {},
+              onPressed: () => change(),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void change() {
+    setState(() {
+      color = randomColor();
+      margin = randomMargin();
+      borderRadius = randomBorderRadius();
+    });
   }
 }
 
