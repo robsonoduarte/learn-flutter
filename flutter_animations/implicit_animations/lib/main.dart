@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:implicit_animations/fade_in.dart';
-import 'package:implicit_animations/shape-shifting.dart';
+import 'package:implicit_animations/shape_shifting.dart';
 
 void main() {
   runApp(const MaterialApp(
