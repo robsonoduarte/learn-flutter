@@ -1,55 +1,33 @@
+import 'package:explicit_animations/animation_controller_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const LogoApp());
+  runApp(const MaterialApp(home: ExplicitAnimation()));
 }
 
-class LogoApp extends StatefulWidget {
-  const LogoApp({super.key});
+class ExplicitAnimation extends StatefulWidget {
+  const ExplicitAnimation({super.key});
 
   @override
-  State<LogoApp> createState() => _LogoAppState();
+  State<ExplicitAnimation> createState() => _ExplicitAnimationState();
 }
 
-class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
-  late Animation<double> animation;
-  late AnimationController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    );
-    animation = Tween<double>(begin: 0, end: 300).animate(controller)
-      ..addListener(
-        () {
-          setState(() {});
-        },
-      );
-    controller.forward();
-  }
-
+class _ExplicitAnimationState extends State<ExplicitAnimation> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            height: animation.value,
-            width: animation.value,
-            child: const FlutterLogo(),
-          ),
-        ),
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AnimationControllerScreen(),
+                ),
+              );
+            },
+            child: const Text("Animation Controller")),
       ),
     );
-  }
-
-  @override
-  void deactivate() {
-    controller.dispose();
-    super.dispose();
   }
 }
