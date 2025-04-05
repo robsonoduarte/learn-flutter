@@ -1,0 +1,2 @@
+/home/bravox/git/bravox/learn-flutter/flutter_animations/explicit_animations/android/app/.cxx/RelWithDebInfo/w5b453w1/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/bravox/git/bravox/learn-flutter/flutter_animations/explicit_animations/android/app/.cxx/RelWithDebInfo/w5b453w1/armeabi-v7a/CMakeFiles/rebuild_cache.dir
