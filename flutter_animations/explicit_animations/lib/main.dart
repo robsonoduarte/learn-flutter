@@ -1,3 +1,4 @@
+import 'package:explicit_animations/animated_widget_screen.dart';
 import 'package:explicit_animations/animation_controller_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,16 +18,32 @@ class _ExplicitAnimationState extends State<ExplicitAnimation> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const AnimationControllerScreen(),
-                ),
-              );
-            },
-            child: const Text("Animation Controller")),
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AnimationControllerScreen(),
+                  ),
+                );
+              },
+              child: const Text("Animation Controller"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AnimatedWidgetScreen(),
+                  ),
+                );
+              },
+              child: const Text("Animated Widget"),
+            ),
+          ],
+        ),
       ),
     );
   }

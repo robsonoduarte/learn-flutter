@@ -1,34 +1,12 @@
 import 'package:flutter/material.dart';
 
-
-class AnimatedLogo extends AnimatedWidget {
-  const AnimatedLogo({super.key, required Animation<double> animation})
-      : super(listenable: animation);
-
-
+class AnimatedWidgetScreen extends StatefulWidget {
+  const AnimatedWidgetScreen({super.key});
   @override
-  Widget build(BuildContext context) {
-    final animation = listenable as Animation<double>;
-    return Center(
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        height: animation.value,
-        width: animation.value,
-        child: const FlutterLogo(),
-      ),
-    )
-  }
+  State<AnimatedWidgetScreen> createState() => _AnimatedWidgetScreenState();
 }
 
-class AnimationControllerScreen extends StatefulWidget {
-  const AnimationControllerScreen({super.key});
-
-  @override
-  State<AnimationControllerScreen> createState() =>
-      _AnimationControllerScreenState();
-}
-
-class _AnimationControllerScreenState extends State<AnimationControllerScreen>
+class _AnimatedWidgetScreenState extends State<AnimatedWidgetScreen>
     with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
@@ -40,12 +18,7 @@ class _AnimationControllerScreenState extends State<AnimationControllerScreen>
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-    animation = Tween<double>(begin: 0, end: 300).animate(controller)
-      ..addListener(
-        () {
-          setState(() {});
-        },
-      );
+    animation = Tween<double>(begin: 0, end: 300).animate(controller);
     controller.forward();
   }
 
@@ -55,20 +28,31 @@ class _AnimationControllerScreenState extends State<AnimationControllerScreen>
       appBar: AppBar(
         title: const Text("Animation Controller"),
       ),
-      body: Center(
-        child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 10),
-          height: animation.value,
-          width: animation.value,
-          child: const FlutterLogo(),
-        ),
-      ),
+      body: AnimatedLogo(animation: animation),
     );
   }
 
   @override
   void deactivate() {
+    super.deactivate();
     controller.dispose();
-    super.dispose();
+  }
+}
+
+class AnimatedLogo extends AnimatedWidget {
+  const AnimatedLogo({super.key, required Animation<double> animation})
+      : super(listenable: animation);
+
+  @override
+  Widget build(BuildContext context) {
+    final animation = listenable as Animation<double>;
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        height: animation.value,
+        width: animation.value,
+        child: const FlutterLogo(),
+      ),
+    );
   }
 }
