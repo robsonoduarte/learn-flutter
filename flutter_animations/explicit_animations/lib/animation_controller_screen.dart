@@ -48,7 +48,7 @@ class _AnimationControllerScreenState extends State<AnimationControllerScreen>
 
   @override
   void deactivate() {
+    super.deactivate();
     controller.dispose();
-    super.dispose();
   }
 }
