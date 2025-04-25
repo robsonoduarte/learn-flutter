@@ -19,32 +19,26 @@ class _ExplicitAnimationState extends State<ExplicitAnimation> {
     return Scaffold(
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AnimationControllerScreen(),
-                  ),
-                );
-              },
               child: const Text("Animation Controller"),
+              onPressed: () => push(const AnimationControllerScreen()),
             ),
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AnimatedWidgetScreen(),
-                  ),
-                );
-              },
               child: const Text("Animated Widget"),
+              onPressed: () => push(const AnimatedWidgetScreen()),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  push(Widget widget) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => widget),
     );
   }
 }
