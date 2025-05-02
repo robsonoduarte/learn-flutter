@@ -22,28 +22,22 @@ class _ExplicitAnimationState extends State<ExplicitAnimation> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              child: const Text("Animation Controller"),
-              onPressed: () => push(const AnimationControllerScreen()),
-            ),
-            ElevatedButton(
-              child: const Text("Animated Widget"),
-              onPressed: () => push(const AnimatedWidgetScreen()),
-            ),
-            ElevatedButton(
-              child: const Text("Status Listener"),
-              onPressed: () => push(const StatusListenerScreen()),
-            ),
+            button("Animation Controller", const AnimationControllerScreen()),
+            button("Animated Widget", const AnimatedWidgetScreen()),
+            button("Status Listener", const StatusListenerScreen()),
           ],
         ),
       ),
     );
   }
 
-  push(Widget widget) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => widget),
+  button(String text, Widget widget) {
+    return ElevatedButton(
+      child: Text(text),
+      onPressed: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => widget),
+      ),
     );
   }
 }
