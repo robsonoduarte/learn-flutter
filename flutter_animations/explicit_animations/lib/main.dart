@@ -36,7 +36,7 @@ class _ExplicitAnimationState extends State<ExplicitAnimation> {
       child: Text(text),
       onPressed: () => Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => widget),
+        MaterialPageRoute(builder: (_) => widget),
       ),
     );
   }
