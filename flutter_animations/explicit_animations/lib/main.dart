@@ -1,3 +1,4 @@
+import 'package:explicit_animations/screen/animated_builder_screen.dart';
 import 'package:explicit_animations/screen/animated_widget_screen.dart';
 import 'package:explicit_animations/screen/animation_controller_screen.dart';
 import 'package:explicit_animations/screen/status_listener_screen.dart';
@@ -25,6 +26,7 @@ class _ExplicitAnimationState extends State<ExplicitAnimation> {
             button("Animation Controller", const AnimationControllerScreen()),
             button("Animated Widget", const AnimatedWidgetScreen()),
             button("Status Listener", const StatusListenerScreen()),
+            button("Animated Builder", const AnimatedBuilderScreen()),
           ],
         ),
       ),
