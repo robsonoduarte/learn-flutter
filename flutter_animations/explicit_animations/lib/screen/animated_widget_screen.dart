@@ -26,7 +26,7 @@ class _AnimatedWidgetScreenState extends State<AnimatedWidgetScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Animation Controller"),
+        title: const Text("Animated Widget"),
       ),
       body: AnimatedLogo(animation: animation),
     );
